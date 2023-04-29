@@ -1,16 +1,8 @@
-use actix_web::{web, App, HttpRequest, HttpServer, Responder};
-async fn greet(req: HttpRequest) -> impl Responder {
-    let name = req.match_info().get("name").unwrap_or("World");
-    format!("Hello {}!", &name)
-}
+//! src/main.rs
+use zero2prod::run;
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
-    HttpServer::new(|| {
-        App::new()
-            .route("/", web::get().to(greet))
-            .route("/{name}", web::get().to(greet))
-    })
-    .bind("127.0.0.1:8000")?
-    .run()
-    .await
+    // Bubble up the io::Error if we failed to bind the address
+    // Otherwise call .await on our Server
+    run("localhost:0")?.await
 }
