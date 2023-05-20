@@ -1,1 +1,0 @@
-* This is the project that is made in the book zero2prod in rust [[https://www.zero2prod.com/][check it out]]
